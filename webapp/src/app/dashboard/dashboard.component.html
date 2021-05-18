@@ -1,0 +1,95 @@
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <table class="table table-sm">
+      <thead>
+      <tr>
+        <td>Last updated</td>
+        <td>Station</td>
+        <td>Gas</td>
+        <td>Pollution</td>
+        <td>Actions</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let stationStatistic of stationStatistics">
+        <td>
+          {{stationStatistic.instant}}
+        </td>
+        <td>
+          <table class="table table-sm table-dark borderless">
+            <tr>
+              <td>ID</td>
+              <td>{{stationStatistic.station.id}}</td>
+            </tr>
+            <tr>
+              <td>Name</td>
+              <td>{{stationStatistic.station.name}}</td>
+            </tr>
+            <tr>
+              <td>Serial</td>
+              <td>{{stationStatistic.station.serial}}</td>
+            </tr>
+            <tr>
+              <td>LAT/LONG</td>
+              <td>{{stationStatistic.station.latitude}} / {{stationStatistic.station.longitude}}</td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <table class="table table-sm table-dark borderless">
+            <tr>
+              <td>Status</td>
+              <td [ngClass]="stationStatistic.statistics.gas.status == 'NORMAL' ? 'text-success' : 'text-warning'">{{stationStatistic.statistics.gas.status}}</td>
+            </tr>
+            <tr>
+              <td>Interval</td>
+              <td class="text-info">{{stationStatistic.statistics.gas.interval}}</td>
+            </tr>
+            <tr>
+              <td>Success count</td>
+              <td><span class="text-success">{{stationStatistic.statistics.gas.successCount}}</span></td>
+            </tr>
+            <tr>
+              <td>Error count</td>
+              <td><span class="text-danger">{{stationStatistic.statistics.gas.errorCount}}</span></td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <table class="table table-sm table-dark borderless">
+            <tr>
+              <td>Status</td>
+              <td [ngClass]="stationStatistic.statistics.pollution.status == 'NORMAL' ? 'text-success' : 'text-warning'">{{stationStatistic.statistics.pollution.status}}</td>
+            </tr>
+            <tr>
+              <td>Interval</td>
+              <td class="text-info">{{stationStatistic.statistics.pollution.interval}}</td>
+            </tr>
+            <tr>
+              <td>Success count</td>
+              <td><span class="text-success">{{stationStatistic.statistics.pollution.successCount}}</span></td>
+            </tr>
+            <tr>
+              <td>Error count</td>
+              <td><span class="text-danger">{{stationStatistic.statistics.pollution.errorCount}}</span></td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <div class="btn-group btn-group-vertical" role="group" aria-label="Basic example">
+            <button class="btn" (click)="openModal(stationStatistic)">
+              <fa-icon [icon]="faSettings" size="1x"></fa-icon>
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
